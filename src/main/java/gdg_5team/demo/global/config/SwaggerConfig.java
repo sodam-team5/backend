@@ -13,16 +13,18 @@ import org.springframework.context.annotation.Configuration;
 public class SwaggerConfig {
 
     @Bean
-    public OpenAPI GDG5teamAPI() {
+    public OpenAPI SodamAPI() {
         // API 정보 설정
         Info info = new Info()
-                .title("GDG 5team API")
-                .description("GDG 5team API 명세서")
+                .title("GDG 5team Sodam API")
+                .description("GDG 5team Sodam API 명세서")
                 .version("1.0.0");
 
         // SecuritySecheme 설정
         String jwtSchemeName = "JWT TOKEN";
         SecurityRequirement securityRequirement = new SecurityRequirement().addList(jwtSchemeName);
+
+        // Componenets에 보안 스키마 등록
         Components components = new Components()
                 .addSecuritySchemes(jwtSchemeName, new SecurityScheme()
                         .name(jwtSchemeName)
