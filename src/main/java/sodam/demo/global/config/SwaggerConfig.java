@@ -1,4 +1,4 @@
-package gdg_5team.demo.global.config;
+package sodam.demo.global.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;

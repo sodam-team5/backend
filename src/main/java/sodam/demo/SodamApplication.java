@@ -1,13 +1,11 @@
-package gdg_5team.demo;
+package sodam.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Gdg5teamApplication {
-
+public class SodamApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(Gdg5teamApplication.class, args);
+		SpringApplication.run(SodamApplication.class, args);
 	}
-
 }
