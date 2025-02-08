@@ -1,4 +1,4 @@
-package sodam.demo.domain.temp;
+package sodam.demo.global.temp;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
