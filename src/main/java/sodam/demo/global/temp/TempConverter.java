@@ -1,4 +1,4 @@
-package sodam.demo.domain.temp;
+package sodam.demo.global.temp;
 
 public class TempConverter {
 

@@ -1,11 +1,11 @@
-package sodam.demo.domain.temp;
+package sodam.demo.global.temp;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import sodam.demo.domain.temp.service.TempQueryService;
+import sodam.demo.global.temp.service.TempQueryService;
 import sodam.demo.global.apipayload.ApiResponse;
 
 @RestController
