@@ -1,15 +1,21 @@
 package sodam.demo.domain.answers.domain;
 
 import jakarta.persistence.*;
+import lombok.*;
 import sodam.demo.domain.elders.domain.Elder;
 import sodam.demo.domain.questions.domain.Question;
 import sodam.demo.domain.recommendations.domain.Recommendation;
+import sodam.demo.global.common.BaseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Answer {
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Answer extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

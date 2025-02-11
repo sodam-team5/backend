@@ -1,16 +1,22 @@
 package sodam.demo.domain.elders.domain;
 
 import jakarta.persistence.*;
+import lombok.*;
 import sodam.demo.domain.answers.domain.Answer;
 import sodam.demo.domain.elderinterests.domain.ElderInterest;
 import sodam.demo.domain.guardianelders.domain.GuardianElder;
+import sodam.demo.global.common.BaseEntity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Elder {
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Elder extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

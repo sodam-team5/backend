@@ -3,12 +3,13 @@ package sodam.demo.domain.interests.domain;
 import jakarta.persistence.*;
 import sodam.demo.domain.elderinterests.domain.ElderInterest;
 import sodam.demo.domain.questions.domain.Question;
+import sodam.demo.global.common.BaseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Interest {
+public class Interest extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
