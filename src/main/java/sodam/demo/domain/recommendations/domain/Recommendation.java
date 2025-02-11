@@ -3,9 +3,10 @@ package sodam.demo.domain.recommendations.domain;
 import jakarta.persistence.*;
 import sodam.demo.domain.answers.domain.Answer;
 import sodam.demo.domain.questions.domain.Question;
+import sodam.demo.global.common.BaseEntity;
 
 @Entity
-public class Recommendation {
+public class Recommendation extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

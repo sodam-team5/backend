@@ -2,13 +2,14 @@ package sodam.demo.domain.guardians.domain;
 
 import jakarta.persistence.*;
 import sodam.demo.domain.guardianelders.domain.GuardianElder;
+import sodam.demo.global.common.BaseEntity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Guardian {
+public class Guardian extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

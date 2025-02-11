@@ -32,7 +32,8 @@ public class SpeechToTextController {
                                                                @RequestParam("elderId") Long elderId) {
         try {
             // 1. 오디오 파일을 텍스트로 변환
-            String transcript = speechToTextService.transcribe(audioFile, 44100);
+            String transcript = speechToTextService.transcribe(audioFile, 16000);
+            System.out.println("Transcript: " + transcript);
 
             // 2. 변환된 텍스트를 엔티티로 변환 및 저장
             answerCommandService.saveAnswer(transcript, questionId, elderId);

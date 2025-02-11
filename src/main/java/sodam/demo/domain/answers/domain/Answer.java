@@ -5,6 +5,7 @@ import lombok.*;
 import sodam.demo.domain.elders.domain.Elder;
 import sodam.demo.domain.questions.domain.Question;
 import sodam.demo.domain.recommendations.domain.Recommendation;
+import sodam.demo.global.common.BaseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Answer {
+public class Answer extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
