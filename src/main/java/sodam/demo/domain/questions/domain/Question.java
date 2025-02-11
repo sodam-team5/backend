@@ -1,6 +1,7 @@
 package sodam.demo.domain.questions.domain;
 
 import jakarta.persistence.*;
+import lombok.*;
 import sodam.demo.domain.answers.domain.Answer;
 import sodam.demo.domain.interests.domain.Interest;
 import sodam.demo.domain.recommendations.domain.Recommendation;
@@ -9,6 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
