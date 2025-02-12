@@ -1,5 +1,6 @@
 package sodam.demo.global.apipayload.status;
 
+import com.google.api.Http;
 import sodam.demo.global.apipayload.BaseErrorCode;
 import sodam.demo.global.apipayload.ErrorReasonDto;
 import lombok.AllArgsConstructor;
@@ -16,7 +17,13 @@ public enum ErrorStatus implements BaseErrorCode {
     _FORBIDDEN(HttpStatus.FORBIDDEN, "COMMON403", "금지된 요청입니다."),
 
     // 테스트용 예외 상태
-    TEMP_EXCEPTION(HttpStatus.BAD_REQUEST, "TEMP4001", "이거는 테스트 에러입니다.");
+    TEMP_EXCEPTION(HttpStatus.BAD_REQUEST, "TEMP4001", "이거는 테스트 에러입니다."),
+
+    // 사용자 관련 에러
+    ELDER_NOT_FOUND(HttpStatus.NOT_FOUND, "ELDER4001", "존재하지 않는 사용자입니다."),
+
+    // 질문 관련 에러
+    QUESTION_NOT_FOUND(HttpStatus.NOT_FOUND, "QUESTION4001", "존재하지 않는 질문입니다.");
 
     private final HttpStatus httpStatus;
     private final String code;
