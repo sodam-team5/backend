@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import sodam.demo.domain.answers.service.AnswerCommandService;
+import sodam.demo.domain.answer.service.AnswerCommandService;
 import sodam.demo.global.apipayload.ApiResponse;
 
 import java.io.IOException;
