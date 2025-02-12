@@ -3,11 +3,9 @@ package sodam.demo.domain.stt;
 import com.google.cloud.speech.v1.*;
 import com.google.protobuf.ByteString;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import sodam.demo.domain.answers.domain.Answer;
-import sodam.demo.domain.answers.repository.AnswerRepository;
+import sodam.demo.domain.answer.repository.AnswerRepository;
 
 import java.io.IOException;
 
