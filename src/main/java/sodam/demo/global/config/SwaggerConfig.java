@@ -34,7 +34,7 @@ public class SwaggerConfig {
 
         // OpenAPI 구성
         return new OpenAPI()
-                .addServersItem(new Server().url("/"))
+                .addServersItem(new Server().url("https://backend-service-723860755736.asia-northeast3.run.app"))
                 .info(info)
                 .addSecurityItem(securityRequirement)
                 .components(components);
