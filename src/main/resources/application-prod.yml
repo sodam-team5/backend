@@ -16,7 +16,8 @@ spring:
     level:
       org.hibernate.SQL: DEBUG
 springdoc:
+  api-docs:
+    enabled: true
   swagger-ui:
     path: /swagger-ui.html
-  api-docs:
-    path: /v3/api-docs
+    enabled: true

@@ -19,9 +19,16 @@ public class GoogleCloudConfig {
     @Bean
     public SpeechSettings speechSettings(){
         try{
-            return SpeechSettings.newBuilder()
-                    .setCredentialsProvider(()-> GoogleCredentials.fromStream(gcsCredentials.getInputStream()))
-                    .build();
+            GoogleCredentials credentials;
+            if(System.getenv("GOOGLE_APPLICATION_CREDENTIALS") != null){
+                credentials = GoogleCredentials.getApplicationDefault();
+                System.out.println("GOOGLE_APPLICATION_CREDENTIALS 환경 변수 사용");
+            }else{
+                // 환경 변수가 없으면 JSON 파일 직접 로드 (로컬 용)
+                credentials = GoogleCredentials.fromStream(gcsCredentials.getInputStream());
+                System.out.println("환경 변수 없어 stt.json 파일 사용");
+            }
+            return SpeechSettings.newBuilder().setCredentialsProvider(()-> credentials).build();
         } catch(Exception e){
             throw new RuntimeException("GCP Speech-to-Text 설정 중 오류가 발생했습니다.", e);
         }
