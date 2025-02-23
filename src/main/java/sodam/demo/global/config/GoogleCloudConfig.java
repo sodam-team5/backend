@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 
+import java.io.IOException;
+
 @Configuration
 public class GoogleCloudConfig {
     /*
@@ -17,19 +19,25 @@ public class GoogleCloudConfig {
     private Resource gcsCredentials;
 
     @Bean
-    public SpeechSettings speechSettings(){
-        try{
+    public SpeechSettings speechSettings() {
+        try {
             GoogleCredentials credentials;
-            if(System.getenv("GOOGLE_APPLICATION_CREDENTIALS") != null){
+
+            // 배포 환경: GOOGLE_CLOUD_PROJECT 환경 변수가 존재하면 ADC를 사용
+            if (System.getenv("GOOGLE_CLOUD_PROJECT") != null) {
                 credentials = GoogleCredentials.getApplicationDefault();
-                System.out.println("GOOGLE_APPLICATION_CREDENTIALS 환경 변수 사용");
-            }else{
-                // 환경 변수가 없으면 JSON 파일 직접 로드 (로컬 용)
+                System.out.println("배포 환경: Workload Identity Federation 사용 (ADC)");
+            } else {
+                // 로컬 환경: JSON 파일을 직접 로드
                 credentials = GoogleCredentials.fromStream(gcsCredentials.getInputStream());
-                System.out.println("환경 변수 없어 stt.json 파일 사용");
+                System.out.println("로컬 환경: stt.json 파일 사용");
             }
-            return SpeechSettings.newBuilder().setCredentialsProvider(()-> credentials).build();
-        } catch(Exception e){
+
+            return SpeechSettings.newBuilder()
+                    .setCredentialsProvider(() -> credentials)
+                    .build();
+
+        } catch (IOException e) {
             throw new RuntimeException("GCP Speech-to-Text 설정 중 오류가 발생했습니다.", e);
         }
     }
