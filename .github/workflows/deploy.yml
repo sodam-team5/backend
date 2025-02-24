@@ -1,0 +1,50 @@
+name: Deploy to Cloud Run
+
+on:
+  push:
+    branches:
+      - develop # develop 브랜치에 push할 때 실행
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  REGION: ${{ secrets.CLOUD_RUN_REGION }}
+  SERVICE: ${{ secrets.CLOUD_RUN_SERVICE }}
+  REPOSITORY: ${{ secrets.DOCKER_REPOSITORY }}
+  DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Authenticate Docker with GCP Artifact Registry
+        run: gcloud auth configure-docker $DOCKER_REGISTRY
+
+      - name: Build and Push Docker Image
+        run: |
+          IMAGE_URI="$DOCKER_REGISTRY/$PROJECT_ID/$REPOSITORY/backend-image:latest"
+          docker build -t $IMAGE_URI .
+          docker push $IMAGE_URI
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy $SERVICE \
+            --image $DOCKER_REGISTRY/$PROJECT_ID/$REPOSITORY/backend-image:latest \
+            --region $REGION \
+            --platform managed \
+            --allow-unauthenticated
