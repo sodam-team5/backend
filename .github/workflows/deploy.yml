@@ -26,6 +26,14 @@ jobs:
           fetch-depth: 0
           path: .
 
+      - name: Fix duplicated backend directory
+        run: |
+          if [ -d "backend/backend" ]; then 
+            echo "Removing redundant backend/backend directory."
+            mv backend/backend* backend/
+            rm -rf backend/backend
+          fi 
+
       - name: Debug Repository Structure
         run: |
           echo "현재 디렉토리 구조:"
@@ -33,14 +41,6 @@ jobs:
           ls -al
           echo "backend 디렉토리 내용:"
           ls -al backend || echo "ERROR: backend directory not found!"
-
-      - name: Fix duplicated backend directory
-        run: | 
-          if [ -d "backend/backend" ]; then 
-            echo "Removing redundant backend/backend directory."
-            mv backend/backend* backend/
-            rm -rf backend/backend
-          fi 
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
