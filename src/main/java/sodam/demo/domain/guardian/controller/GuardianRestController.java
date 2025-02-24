@@ -19,7 +19,7 @@ import java.time.LocalDate;
 
 @RestController
 @RequiredArgsConstructor
-public class GuardianController {
+public class GuardianRestController {
     private final ElderQueryService elderQueryService;
     private final AnswerQueryService answerQueryService;
     private final GuardianCommandService guardianCommandService;

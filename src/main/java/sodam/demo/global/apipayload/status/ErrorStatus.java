@@ -21,6 +21,7 @@ public enum ErrorStatus implements BaseErrorCode {
 
     // 사용자 관련 에러
     ELDER_NOT_FOUND(HttpStatus.NOT_FOUND, "ELDER4001", "존재하지 않는 사용자입니다."),
+    GUARDIAN_NOT_FOUND(HttpStatus.NOT_FOUND, "GUARDIAN4001", "존재하지 않는 사용자입니다."),
 
     // 질문 관련 에러
     QUESTION_NOT_FOUND(HttpStatus.NOT_FOUND, "QUESTION4001", "존재하지 않는 질문입니다.");
