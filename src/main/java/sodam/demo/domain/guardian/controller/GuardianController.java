@@ -26,7 +26,7 @@ public class GuardianController {
         return ApiResponse.onSuccess(elderQueryService.getElderList(guardianId));
     }
 
-    @Operation(summary = "말벗 페이지 - 어르신 기록 조회 API", description = "말벗 페이지에서 어르신이 기록을 남긴 날짜 리스트를 반환합니다.")
+    @Operation(summary = "말벗 페이지 - 어르신 기록일 목록 조회 API", description = "말벗 페이지에서 어르신이 기록을 남긴 날짜 리스트를 반환합니다.")
     @GetMapping("/elders/{elderId}/records")
     public ApiResponse<AnswerResponseDto.AnswerDateListDto> getElderAnswerDateList(@PathVariable Long elderId){
         return ApiResponse.onSuccess(answerQueryService.getElderAnswerDateList(elderId));
