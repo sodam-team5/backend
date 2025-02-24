@@ -28,8 +28,8 @@ jobs:
       - name: Fix duplicated backend directory
         run: |
           if [ -d "backend/backend" ]; then 
-            echo "Removing redundant backend/backend directory."
-            mv backend/backend* backend/
+            echo "Moving contents from backend/backend to backend/"
+            mv backend/backend/* backend/
             rm -rf backend/backend
           fi 
 
@@ -55,12 +55,14 @@ jobs:
 
       - name: Build Spring Boot Application
         run: |
+          cd backend
           chmod +x gradlew
           ./gradlew build -x test
 
       - name: Build and Push Docker Image
         run: |
           IMAGE_URI="$DOCKER_REGISTRY/$PROJECT_ID/$REPOSITORY/backend-image:latest"
+          cd backend
           docker build -t $IMAGE_URI .
           docker push $IMAGE_URI
 
