@@ -51,6 +51,7 @@ public class AnswerConverter {
 
     public static AnswerResponseDto.AnswerDetailDto toAnswerDetailDto(Answer answer){
         return AnswerResponseDto.AnswerDetailDto.builder()
+                .questionId(answer.getQuestion().getId())
                 .questionText(answer.getQuestion().getQuestionText())
                 .answerText(answer.getAnswerText())
                 .build();

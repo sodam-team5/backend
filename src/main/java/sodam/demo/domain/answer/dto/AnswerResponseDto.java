@@ -32,6 +32,7 @@ public class AnswerResponseDto {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class AnswerDetailDto{
+        private Long questionId;
         private String questionText;
         private String answerText;
     }
