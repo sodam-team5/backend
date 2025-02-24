@@ -3,7 +3,7 @@ name: Deploy to Cloud Run
 on:
   push:
     branches:
-      - develop # develop 브랜치에 push할 때 실행
+      - develop
 
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
@@ -24,10 +24,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          path: backend  # backend 폴더에 체크아웃
 
       - name: Debug Repository Structure
         run: |
           echo "현재 디렉토리 구조:"
+          pwd
           ls -al
           echo "backend 디렉토리 내용:"
           ls -al backend || echo "ERROR: backend directory not found!"
@@ -45,9 +47,9 @@ jobs:
         run: gcloud auth configure-docker $DOCKER_REGISTRY
 
       - name: Build and Push Docker Image
+        working-directory: backend
         run: |
           IMAGE_URI="$DOCKER_REGISTRY/$PROJECT_ID/$REPOSITORY/backend-image:latest"
-          cd backend
           docker build -t $IMAGE_URI .
           docker push $IMAGE_URI
 
