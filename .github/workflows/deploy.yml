@@ -55,14 +55,12 @@ jobs:
 
       - name: Build Spring Boot Application
         run: |
-          cd backend
           chmod +x gradlew
           ./gradlew build -x test
 
       - name: Build and Push Docker Image
         run: |
           IMAGE_URI="$DOCKER_REGISTRY/$PROJECT_ID/$REPOSITORY/backend-image:latest"
-          cd backend
           docker build -t $IMAGE_URI .
           docker push $IMAGE_URI
 
