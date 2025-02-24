@@ -56,7 +56,7 @@ jobs:
       - name: Build and Push Docker Image
         run: |
           IMAGE_URI="$DOCKER_REGISTRY/$PROJECT_ID/$REPOSITORY/backend-image:latest"
-          docker build -t $IMAGE_URI backend/.
+          docker build -t $IMAGE_URI .
           docker push $IMAGE_URI
 
       - name: Deploy to Cloud Run
