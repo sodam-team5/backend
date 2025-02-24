@@ -23,9 +23,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # 🔍 GitHub Actions에서 파일 구조 확인 (backend 디렉토리 확인)
       - name: Debug Repository Structure
-        run: ls -al
-        working-directory: backend
+        run: |
+          echo "📂 현재 디렉토리 구조:"
+          ls -al
+          echo "📂 backend 디렉토리 내용:"
+          ls -al backend/
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
@@ -39,13 +43,24 @@ jobs:
       - name: Configure Docker authentication
         run: gcloud auth configure-docker $DOCKER_REGISTRY
 
+      # ✅ Dockerfile 존재 여부 체크 (배포 실패 방지)
+      - name: Check if Dockerfile exists
+        run: |
+          if [ ! -f backend/Dockerfile ]; then
+            echo "❌ Dockerfile not found in backend directory!"
+            exit 1
+          else
+            echo "✅ Dockerfile found!"
+          fi
+
+      # ✅ `backend/` 디렉토리에서 Docker build & push 수행
       - name: Build and Push Docker Image
-        working-directory: backend
         run: |
           IMAGE_URI="$DOCKER_REGISTRY/$PROJECT_ID/$REPOSITORY/backend-image:latest"
-          docker build -t $IMAGE_URI .
+          docker build -t $IMAGE_URI backend/.
           docker push $IMAGE_URI
 
+      # ✅ Cloud Run 배포 수행
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy $SERVICE \
