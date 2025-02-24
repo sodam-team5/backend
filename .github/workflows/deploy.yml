@@ -33,12 +33,12 @@ jobs:
           echo "backend 디렉토리 내용:"
           ls -al backend || echo "ERROR: backend directory not found!"
 
-      - name: Remove duplicate backend directory (if exists)
-        run: |
-          if [ -d "backend/backend" ]; then
-            echo "중복된 backend/backend 디렉토리를 삭제한다"
-            mv backend/backend/* backend/
-            rm -rf backend/backend 
+      - name: Fix duplicated backend directory
+        run: | 
+          if [ -d "backend/backend" ]; then 
+            echo "Removing redundant backend/backend directory."
+            mv backend/backend* backend/
+            rm -rf backend/backend
           fi 
 
       - name: Authenticate to Google Cloud
@@ -52,6 +52,11 @@ jobs:
 
       - name: Configure Docker authentication
         run: gcloud auth configure-docker $DOCKER_REGISTRY
+
+      - name: Build Spring Boot Application  =
+        run: |
+          chmod +x gradlew
+          ./gradlew build
 
       - name: Build and Push Docker Image
         run: |
