@@ -5,14 +5,25 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.util.List;
+
 public class ElderRequestDto {
 
     @Builder
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class ElderLoginDto{
-        private String elderName;
-        private String guardianName;
+    public static class ElderRegisterDto {
+        private String name;
+        private LocalDate birthDate;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ElderInterestDto {
+        private List<Long> interestIds;
     }
 }

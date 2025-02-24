@@ -30,6 +30,10 @@ public class Guardian extends BaseEntity {
     @Column(nullable = false)
     private String password;
 
+    public void encodePassword(String encodePassword){
+        this.password = encodePassword;
+    }
+
     @OneToMany(mappedBy = "guardian", cascade = CascadeType.ALL)
     private List<GuardianElder> guardianElders = new ArrayList<>();
 }
