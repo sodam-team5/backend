@@ -6,16 +6,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-public class GuardianResponseDto {
+public class GuardianRequestDto {
 
     @Builder
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class GuardianSignupResponseDto {
-        private Long guardianId;
-        private LocalDateTime createdAt;
+    public static class GuardianSignupDto{
+        private String name;
+        private String email;
+        private String password;
+        private LocalDate birthDate;
     }
 }

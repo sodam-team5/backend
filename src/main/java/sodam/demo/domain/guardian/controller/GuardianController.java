@@ -3,13 +3,16 @@ package sodam.demo.domain.guardian.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import sodam.demo.domain.answer.dto.AnswerResponseDto;
 import sodam.demo.domain.answer.service.AnswerQueryService;
 import sodam.demo.domain.elder.dto.ElderResponseDto;
 import sodam.demo.domain.elder.service.ElderQueryService;
+import sodam.demo.domain.guardian.converter.GuardianConverter;
+import sodam.demo.domain.guardian.dto.GuardianRequestDto;
+import sodam.demo.domain.guardian.dto.GuardianResponseDto;
+import sodam.demo.domain.guardian.entity.Guardian;
+import sodam.demo.domain.guardian.service.GuardianCommandService;
 import sodam.demo.global.apipayload.ApiResponse;
 
 import java.time.LocalDate;
@@ -19,6 +22,7 @@ import java.time.LocalDate;
 public class GuardianController {
     private final ElderQueryService elderQueryService;
     private final AnswerQueryService answerQueryService;
+    private final GuardianCommandService guardianCommandService;
 
     @Operation(summary = "말벗 페이지 - 어르신 목록 조회 API", description = "말벗 페이지에서 말벗이 담당하는 어르신 목록을 조회하는 API입니다.")
     @GetMapping("/{guardianId}/elders")
@@ -37,5 +41,12 @@ public class GuardianController {
     public ApiResponse<AnswerResponseDto.AnswerDetailListDto> getElderDetailList(@PathVariable Long elderId,
                                                                                  @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate recordDate){
         return ApiResponse.onSuccess(answerQueryService.getElderDetailList(elderId, recordDate));
+    }
+
+    @Operation(summary = "말벗 회원가입", description = "말벗이 회원가입을 하는 API입니다.")
+    @PostMapping("/signup")
+    public ApiResponse<GuardianResponseDto.GuardianSignupResponseDto> signup(@RequestBody GuardianRequestDto.GuardianSignupDto request){
+        Guardian guardian = guardianCommandService.signupGuardian(request);
+        return ApiResponse.onSuccess(GuardianConverter.toGuardianSignupResultDto(guardian));
     }
 }
