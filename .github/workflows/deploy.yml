@@ -23,8 +23,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Debug File Structure
+      - name: Debug Repository Structure
         run: ls -al
+        working-directory: backend
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
