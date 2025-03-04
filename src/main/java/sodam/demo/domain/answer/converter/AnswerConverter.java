@@ -3,7 +3,7 @@ package sodam.demo.domain.answer.converter;
 import org.springframework.stereotype.Component;
 import sodam.demo.domain.answer.dto.AnswerResponseDto;
 import sodam.demo.domain.answer.entity.Answer;
-import sodam.demo.domain.elder.entity.Elder;
+import sodam.demo.domain.member.entity.Elder;
 import sodam.demo.domain.question.entity.Question;
 
 import java.util.Collections;
@@ -17,7 +17,7 @@ public class AnswerConverter {
         return Answer.builder()
                 .answerText(transcript)
                 .question(Question.builder().id(questionId).build())
-                .elder(Elder.builder().id(elderId).build())
+                .elder(Elder.builder().memberId(elderId).build())
                 .build();
     }
 

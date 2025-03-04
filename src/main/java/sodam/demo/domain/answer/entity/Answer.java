@@ -2,7 +2,7 @@ package sodam.demo.domain.answer.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import sodam.demo.domain.elder.entity.Elder;
+import sodam.demo.domain.member.entity.Elder;
 import sodam.demo.domain.question.entity.Question;
 import sodam.demo.domain.recommendation.entity.Recommendation;
 import sodam.demo.global.common.BaseEntity;
